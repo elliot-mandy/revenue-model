@@ -79,6 +79,14 @@ export default function Dashboard() {
   const [hoveredMonth, setHoveredMonth] = useState(null);
 
   const m12 = monthlyData[11];
+  const milestonePoints = [
+    { label: "M1-3", mrr: monthlyData[2].mrr },
+    { label: "M4", mrr: monthlyData[3].mrr },
+    { label: "M6", mrr: monthlyData[5].mrr },
+    { label: "M8", mrr: monthlyData[7].mrr },
+    { label: "M10", mrr: monthlyData[9].mrr },
+    { label: "M12", mrr: monthlyData[11].mrr },
+  ];
   const siteBreakdown = [
     { name: "Small (5)", value: 20, color: "#22c55e" },
     { name: "Medium (10)", value: 57, color: "#3b82f6" },
@@ -125,12 +133,14 @@ export default function Dashboard() {
         <div style={{ fontSize: 10, color: "#64748b", textTransform: "uppercase", letterSpacing: 1.2, marginBottom: 12, fontWeight: 600 }}>Milestones</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", position: "relative" }}>
           <div style={{ position: "absolute", top: 5, left: 20, right: 20, height: 1, background: "linear-gradient(90deg, #334155, #22c55e, #3b82f6)", opacity: 0.4 }} />
-          <Milestone month="M1-3" text="Build Phase 1" active />
-          <Milestone month="M4" text="First customer" active />
-          <Milestone month="M6" text="Seed talks" active />
-          <Milestone month="M8" text="Seed close" active />
-          <Milestone month="M10" text="£8k MRR" active />
-          <Milestone month="M12" text="£13k MRR" active />
+          {milestonePoints.map((point) => (
+            <Milestone
+              key={point.label}
+              month={point.label}
+              text={`£${point.mrr.toLocaleString()} MRR`}
+              active
+            />
+          ))}
         </div>
       </div>
 
